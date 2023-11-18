@@ -1,0 +1,10 @@
+﻿  pch.cpp
+  AssemblyInfo.cpp
+  CppCLR_WinformsProjekt.cpp
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная работа №6\Form1.h(11,8): error C2143: синтаксическая ошибка: отсутствие ";" перед "using namespace"
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная работа №6\Form1.h(11,8): error C2871: Class: пространство имен с таким именем не существует
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная работа №6\Form1.h(462,39): warning C4244: =: преобразование "__int64" в "int", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная работа №6\Form1.h(463,35): warning C4244: =: преобразование "__int64" в "int", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная работа №6\Form1.h(464,35): warning C4244: =: преобразование "__int64" в "int", возможна потеря данных
+  Form1.cpp
+  Создание кода...
