@@ -1,0 +1,16 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main() {
+
+ int (a,b);
+ float c;
+ cout >> "Введите 2 числа \n";
+ scanf(a, b);
+ c = (a+b)/2.0;
+ cout << "Среднее арифметическое = " << c << "\n";
+ c = sqrt(a*b);
+ printf("Среднее геометрическое = ", c);
+
+}
