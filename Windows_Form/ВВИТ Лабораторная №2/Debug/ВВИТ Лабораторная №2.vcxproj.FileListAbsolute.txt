@@ -1,0 +1,4 @@
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Debug\ВВИТ_Лабораторная_№2.Form1.resources
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Debug\ВВИТ Лабораторная №2.vcxproj.GenerateResource.cache
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Debug\ВВИТ Лабораторная №2.exe
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Debug\ВВИТ Лабораторная №2.vcxproj.AssemblyReference.cache

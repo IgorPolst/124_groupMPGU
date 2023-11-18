@@ -1,0 +1,13 @@
+﻿  CppCLR_WinformsProjekt.cpp
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(277,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(278,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(295,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(296,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(305,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(306,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(317,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(318,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(327,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Form1.h(337,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  AssemblyInfo.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  ВВИТ Лабораторная №2.vcxproj -> C:\Users\Игорь\source\repos\ВВИТ Лабораторная №2\Debug\ВВИТ Лабораторная №2.exe
