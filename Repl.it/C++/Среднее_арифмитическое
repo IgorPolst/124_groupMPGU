@@ -2,15 +2,15 @@
 #include <math.h>
 using namespace std;
 
-int main() {
+int main()
+{
 
- int (a,b);
- float c;
- cout >> "Введите 2 числа \n";
- scanf(a, b);
- c = (a+b)/2.0;
- cout << "Среднее арифметическое = " << c << "\n";
- c = sqrt(a*b);
- printf("Среднее геометрическое = ", c);
-
+    int a, b;
+    float c;
+    printf("Введите 2 числа \n");
+    cout << a << b;
+    c = (a + b) / 2.0;
+    printf("Среднее арифметическое = ", c, "\n");
+    c = sqrt(a * b);
+    printf("Среднее геометрическое = ", c);
 }
