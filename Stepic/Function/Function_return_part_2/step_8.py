@@ -20,7 +20,7 @@ def is_valid_password(password):
     mass = [int(i) for i in password.split(":")]
     return len(mass) == 3 and is_palindrome(mass[0]) and is_prime(mass[1]) and is_even(mass[2])
     
-
+ 
 # считываем данные
 psw = input()
 
