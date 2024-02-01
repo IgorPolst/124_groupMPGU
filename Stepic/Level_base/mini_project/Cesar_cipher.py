@@ -67,7 +67,6 @@ elif search_key == "1":
         i, cipher = chifer_Cesar(i, dechifer, language)
         new_text += " " + cipher
     print(f"Ваш текст \n{text} \nбыл зашифрован в \n{new_text}")
-
 else:
     # Перебор всех возможных вариантов расшифровки
     if dechifer == "0":
