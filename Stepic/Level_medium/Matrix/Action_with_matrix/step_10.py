@@ -8,8 +8,10 @@ matrix2 = [[int(i) for i in input().split()] for _ in range(n2)]
 
 matrix_result = [[0 for _ in range(m2)] for _ in range(n)]
 
-for index in range (m):
-    matrix[i][index]*matrix2[index][j]
+for i in range(n):
+    for j in range(m2):
+        for o in range(m):
+            matrix_result[i][j] += matrix[i][o] * matrix2[o][j]
 
 for row in matrix_result:
     print(*row, sep=" ")
