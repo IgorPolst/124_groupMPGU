@@ -13,7 +13,6 @@ pets = [('Hatiko', 'Parker', 'Wilson', 50),
         ('Chase', 'Martha', 'Robinson', 73),
         ('Ace', 'Martha', 'Williams', 38),
         ('Rocky', 'Simon', 'Nevel', 32)]
-
-set_people = set([tuple(i[1:4]) for i in pets])
-for i in pets:    
 result = {}
+for elem in pets:
+  result.setdefault(elem[1:], []).append(elem[0])
