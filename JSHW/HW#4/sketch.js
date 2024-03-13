@@ -30,7 +30,7 @@ function setup()
 
 	//initalise the tree object
 	tree = {
-		x: 160,
+		x: 173,
 		y: groundHeight + 20,
 		trunkWidth: 30,
 		trunkHeight: 150,
@@ -95,19 +95,23 @@ function draw()
     
     //TASK: You can draw the tree yourself
 
-   fill(max(70, 128-darkness),0,0); rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight,);
+   fill(max(70, 128-darkness),0,0); 
+    rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
-    ellipse(tree.x+13, tree.y, tree.canopyWidth, tree.canopyHeight);
+    ellipse(tree.x, tree.y, tree.canopyWidth, tree.canopyHeight);
     
-    fill(max(70, 128-darkness),0,0); rect(tree.x+140,tree.y-40,tree.trunkWidth,tree.trunkHeight,);
+    fill(max(70, 128-darkness),0,0); 
+    rect(tree.x+140,tree.y-40,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
     ellipse(tree.x+153, tree.y-40, tree.canopyWidth, tree.canopyHeight);
     
-    fill(max(70, 128-darkness),0,0); rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight,);
+    fill(max(70, 128-darkness),0,0); 
+    rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
     ellipse(tree.x+13, tree.y, tree.canopyWidth, tree.canopyHeight);
     
-    fill(max(70, 128-darkness),0,0); rect(tree.x+500,tree.y+40,tree.trunkWidth,tree.trunkHeight,);
+    fill(max(70, 128-darkness),0,0); 
+    rect(tree.x+500,tree.y+40,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
     ellipse(tree.x+513, tree.y+40, tree.canopyWidth, tree.canopyHeight);
 
