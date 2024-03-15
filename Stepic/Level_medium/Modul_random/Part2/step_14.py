@@ -4,12 +4,16 @@ import string
 
 def generate_password(length):
     pasword = ""
-    for _ in range(length):
-        n = randint(0, 1)
-        if n == 1:
-            pasword += choice("qwertyuipasdfghjkzxcvbnmQWERTYUPASDFGHJKLZXCVBNM")
-        else:
+    for n in range(length):
+        if n % 3 == 0:
+            pasword += choice("qwertyuipasdfghjkzxcvbnm")
+            n += 1
+        elif n % 3 == 1:
             pasword += choice("23456789")
+            n += 1
+        else:
+            pasword += choice("QWERTYUPASDFGHJKLZXCVBNM")
+            n = 0
     return pasword
 
 
