@@ -35,20 +35,20 @@ function setup()
 		trunkWidth: 30,
 		trunkHeight: 150,
 		canopyWidth: 120,
-		canopyHeight: 150
+		canopyHeight: 150,
+		
 	};
 
     //initalise the sun 
 	sun = {
 		x: 150,
 		y: 70,
-		diameter: 80,
-	};
+		diameter: 80};
     
     moon =  {
         x: 600, 
         y: 70, 
-        diameter: 80,};
+        diameter: 80};
     //TASK: intialise a moon object with an extra property for brightness
 
 
@@ -60,7 +60,7 @@ function setup()
 
 function draw()
 {
-    darkness = min(185,mouseX/5.5);
+    darkness = min(mouseX/5.5, 185);
 	//TASK: update the values for the moons brightness, the sun's position and the darkness.
 	//You can either map this to the mouse's location (i.e. the futher left the mouse is the more daylight) or you can just change the values gradually over time.
 
@@ -74,7 +74,7 @@ function draw()
 	ellipse(sun.x, max(sun.y, mouseX), sun.diameter);
     
     //draw the moon
-    fill(min(255, 150+darkness/2),min(255, 200+darkness/2),min(255, 255+darkness/2));
+    fill(150+darkness/3,200+darkness/2,255+darkness/3);
     ellipse(moon.x, moon.y, moon.diameter );
     
     //TASK: you'll need to draw the moon too. Make sure you use brightness to adjust the colour
@@ -96,20 +96,17 @@ function draw()
     //TASK: You can draw the tree yourself
 
    fill(max(70, 128-darkness),0,0); 
-    rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight);
+    rect(tree.x, tree.y,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
     ellipse(tree.x, tree.y, tree.canopyWidth, tree.canopyHeight);
     
+	
+	
     fill(max(70, 128-darkness),0,0); 
     rect(tree.x+140,tree.y-40,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
     ellipse(tree.x+153, tree.y-40, tree.canopyWidth, tree.canopyHeight);
-    
-    fill(max(70, 128-darkness),0,0); 
-    rect(tree.x,tree.y,tree.trunkWidth,tree.trunkHeight);
-    fill(0,max(80,144-darkness),48-darkness);
-    ellipse(tree.x+13, tree.y, tree.canopyWidth, tree.canopyHeight);
-    
+	
     fill(max(70, 128-darkness),0,0); 
     rect(tree.x+500,tree.y+40,tree.trunkWidth,tree.trunkHeight);
     fill(0,max(80,144-darkness),48-darkness);
