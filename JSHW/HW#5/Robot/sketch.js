@@ -56,10 +56,17 @@ function draw()
 	text("1. standing front facing", 20, 160);
 
 	gameChar_x = 45;
-	gameChar_y = 137;
+	gameChar_y = 97;
 	//Add your code here ...
-
-
+	fill("blue");
+	rect(gameChar_x-9, gameChar_y+8, 20, 30);
+	fill("pink");
+	ellipse(gameChar_x, gameChar_y, 30);
+	fill("brown");
+	rect(gameChar_x+3, gameChar_y+35, 10,10);
+	rect(gameChar_x-12, gameChar_y+35, 10,10);
+	
+	
 	//Jumping facing forwards
 	stroke(100);
 	noFill();
@@ -69,9 +76,15 @@ function draw()
 	text("2. jumping facing forwards", 220, 160);
 
 	gameChar_x = 245;
-	gameChar_y = 137;
+	gameChar_y = 78;
 	//Add your code here ...
-
+	fill("blue");
+	rect(gameChar_x-9, gameChar_y+8, 20, 30);
+	fill("pink");
+	ellipse(gameChar_x, gameChar_y, 30);
+	fill("brown");
+	rect(gameChar_x+6, gameChar_y+35, 10,10);
+	rect(gameChar_x-15, gameChar_y+35, 10,10);
 
 	//Walking, turned left
 	stroke(100);
@@ -82,9 +95,16 @@ function draw()
 	text("3. Walking left", 20, 360);
 
 	gameChar_x = 45;
-	gameChar_y = 337;
+	gameChar_y = 290;
 	//Add your code here ...
-
+	
+	fill("blue");
+	rect(gameChar_x-7, gameChar_y+8, 15, 30);
+	fill("pink");
+	ellipse(gameChar_x-2, gameChar_y, 20, 30);
+	fill("brown");
+	rect(gameChar_x-1, gameChar_y+35, 10,10);
+	rect(gameChar_x-15, gameChar_y+35, 10,10);
 
 	//Walking, turned right
 	stroke(100);
@@ -95,9 +115,15 @@ function draw()
 	text("4. Walking right", 220, 360);
 
 	gameChar_x = 245;
-	gameChar_y = 337;
+	gameChar_y = 290;
 	//Add your code here ...
-
+	fill("blue");
+	rect(gameChar_x-7, gameChar_y+8, 15, 30);
+	fill("pink");
+	ellipse(gameChar_x+2, gameChar_y, 20, 30);
+	fill("brown");
+	rect(gameChar_x+6, gameChar_y+35, 10,10);
+	rect(gameChar_x-8, gameChar_y+35, 10,10);
 
 	//Jumping right
 	stroke(100);
@@ -108,9 +134,15 @@ function draw()
 	text("5. Jumping to the right", 20, 560);
 
 	gameChar_x = 45;
-	gameChar_y = 537;
+	gameChar_y = 478;
 	//Add your code here ...
-
+		fill("blue");
+	rect(gameChar_x-7, gameChar_y+8, 15, 30);
+	fill("pink");
+	ellipse(gameChar_x-2, gameChar_y, 20, 30);
+	fill("brown");
+	rect(gameChar_x+6, gameChar_y+35, 10,10);
+	rect(gameChar_x-8, gameChar_y+35, 10,10);
 
 	//Jumping to the left
 	stroke(100);
@@ -121,7 +153,14 @@ function draw()
 	text("6. Jumping to the left", 220, 560);
 
 	gameChar_x = 245;
-	gameChar_y = 537;
+	gameChar_y = 478;
 	//Add your code here ...
+	fill("blue");
+	rect(gameChar_x-7, gameChar_y+8, 15, 30);
+	fill("pink");
+	ellipse(gameChar_x+4, gameChar_y, 20, 30);
+	fill("brown");
+	rect(gameChar_x-1, gameChar_y+35, 10,10);
+	rect(gameChar_x-15, gameChar_y+35, 10,10);
 
 }
