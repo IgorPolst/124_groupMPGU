@@ -81,17 +81,11 @@ function draw()
 	}
 	else if (stage == 4) {
 	text("X", treasureX, treasureY);
-	text("You win!", 650, 100);
-		
-	}
-	else if (stage == 3){
-		textSize(30);
-		text("You were eaten by crocodiles",650,100)
+	text("You win!", 650, 100);	
 	}
 	else if (stage == 5 || counter >= 5){
 		text("You died", 650,100);
-	}
-	
+	}	
 }
 
 
@@ -106,15 +100,12 @@ function mousePressed(){
 		{
 			stage = 4;
 		}
-//		else if ( mouseX < 500  ){
-//			stage = 3;		
-//		}
-	
 	}
 	else if (counter >= 5){
 		stage = 5;
 	}
-	else if (stage == 4 || stage == 5 || stage == 3){
+	
+	if (stage == 4 || stage == 5 ){
 		counter = 0;
 		stage = 0;
 	}
