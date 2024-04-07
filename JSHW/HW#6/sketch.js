@@ -52,7 +52,7 @@ function draw()
 	gameChar_y = mouseY-55;
 	
 	if (stage == 0) {
-		text("You need to find the treasure in 5 attempts", 400,240)
+		text("You need to find the treasure in 5 attempts", 400,240);
 		text("Plese press the button",400, 280);
 		distance = Math.sqrt((button.X+50-mouseX)**2+(button.Y+25-mouseY)**2)
 		fill(distance, 255-distance, 0);
