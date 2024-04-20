@@ -11,9 +11,11 @@ var JUMPSPEED;
 var diamond;
 var position;
 var cloud;
+var clouds_coor;
 var sun;
 var vertex;
 var vertex_small;
+var tree_coor;
 var tree;
 var groundHeight;
 var treeHeight;
@@ -27,39 +29,29 @@ function setup() {
 	speed = 4;
 	jumpSpeed = 10;
 	JUMPSPEED = 10;
-	groundHeight = 400;
+	groundHeight = 500;
 	treeHeight = 80;
 
+	//cloud
+	clouds_coor = {
+		cor_x: [],
+		cor_y: [],
+		color: ["white", "AliceBlue", "DeepSkyBlue"]
+	}
+	for (let i = 0; i < 8; i++) {
+		clouds_coor.cor_x.push(random(100, 1000));
+		clouds_coor.cor_y.push(random(50, 250));
+	};
+
+	//diamoond
 	position = {
-		pos_x: random(30, 1000),
-		pos_y: random(350, 400),
+		pos_x: [], //random(30, 1000),
+		pos_y: [], //random(350, 400),
 		scale: 1.3
 	};
-	diamond = {
-		up_y: position.pos_y,
-		up_1x: position.pos_x,
-		up_2x: position.pos_x + 10 * position.scale,
-		up_3x: position.pos_x + 20 * position.scale,
-		midl_y: position.pos_y + 10 * position.scale,
-		midl_1x: position.pos_x - 5 * position.scale,
-		midl_2x: position.pos_x + 5 * position.scale,
-		midl_3x: position.pos_x + 15 * position.scale,
-		midl_4x: position.pos_x + 25 * position.scale,
-		down_x: position.pos_x + 10 * position.scale,
-		down_y: position.pos_y + 30 * position.scale
-	};
-	cloud = {
-		x1: 150,
-		y1: 170,
-		x2: 180,
-		y2: 180,
-		x3: 210,
-		y3: 180,
-		x4: 120,
-		y4: 180,
-		x5: 90,
-		y5: 180,
-		diameter: 40
+	for (let i = 0; i < 4; i++) {
+		position.pos_x.push(random(30, 1000));
+		position.pos_y.push(random(350, 400));
 	};
 	sun = {
 		x: 400,
@@ -82,15 +74,6 @@ function setup() {
 		x3: 333,
 		y3: 250
 	};
-	tree = {
-		x: 600,
-		y: groundHeight + 100,
-		trunkWidth: 20,
-		trunkHeight: 10,
-		canopyWidth: 20,
-		canopyHeight: 10
-	};
-
 }
 
 function makeJump() {
@@ -207,29 +190,55 @@ function drawStandingFront() {
 }
 
 function drawDiamond() {
-	fill(30, 144, 255);
-	triangle(diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y);
-	triangle(diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y);
-	fill(135, 206, 250);
-	triangle(diamond.midl_1x, diamond.midl_y, diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y);
-	triangle(diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y);
-	triangle(diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y, diamond.midl_4x, diamond.midl_y);
-	fill(72, 61, 139);
-	triangle(diamond.midl_1x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_2x, diamond.midl_y);
-	triangle(diamond.midl_3x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_4x, diamond.midl_y);
-	fill(123, 104, 238);
-	triangle(diamond.midl_2x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_3x, diamond.midl_y);
+	for (var i = 0; i < 4; i++) {
+		diamond = {
+		up_y: position.pos_y[i],
+		up_1x: position.pos_x[i],
+		up_2x: position.pos_x[i] + 10 * position.scale,
+		up_3x: position.pos_x[i] + 20 * position.scale,
+		midl_y: position.pos_y[i] + 10 * position.scale,
+		midl_1x: position.pos_x[i] - 5 * position.scale,
+		midl_2x: position.pos_x[i] + 5 * position.scale,
+		midl_3x: position.pos_x[i] + 15 * position.scale,
+		midl_4x: position.pos_x[i] + 25 * position.scale,
+		down_x: position.pos_x[i] + 10 * position.scale,
+		down_y: position.pos_y[i] + 30 * position.scale
+	};
+
+		fill(30, 144, 255);
+		triangle(diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y);
+		triangle(diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y);
+		fill(135, 206, 250);
+		triangle(diamond.midl_1x, diamond.midl_y, diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y);
+		triangle(diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y);
+		triangle(diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y, diamond.midl_4x, diamond.midl_y);
+		fill(72, 61, 139);
+		triangle(diamond.midl_1x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_2x, diamond.midl_y);
+		triangle(diamond.midl_3x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_4x, diamond.midl_y);
+		fill(123, 104, 238);
+		triangle(diamond.midl_2x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_3x, diamond.midl_y);
+	};
 }
 
 function drawCloud() {
-	noStroke();
-	fill(133, 189, 239);
-	ellipse(cloud.x3, cloud.y3, cloud.diameter);
-	ellipse(cloud.x5, cloud.y5, cloud.diameter);
-	ellipse(cloud.x4, cloud.y4, cloud.diameter * 1.5);
-	ellipse(cloud.x2, cloud.y2, cloud.diameter * 1.5);
-	ellipse(cloud.x1, cloud.y1, cloud.diameter * 2);
+	for (var i = 0; i < 8; i++) {
+
+		cloud = {
+			x: clouds_coor.cor_x[i],
+			y: clouds_coor.cor_y[i],
+			diameter: 40
+		};
+		noStroke(); //fill the sky blue 
+
+		fill(clouds_coor.color[i % 3]);
+		ellipse(cloud.x + 120, cloud.y, cloud.diameter);
+		ellipse(cloud.x, cloud.y, cloud.diameter);
+		ellipse(cloud.x + 30, cloud.y, cloud.diameter * 1.5);
+		ellipse(cloud.x + 90, cloud.y, cloud.diameter * 1.5);
+		ellipse(cloud.x + 60, cloud.y - 10, cloud.diameter * 2)
+	}
 }
+
 
 function drawSun() {
 	fill(255, 255, 0);
@@ -251,16 +260,31 @@ function drawMountain() {
 }
 
 function drawTree() {
-	fill(139, 69, 19);
-	stroke("brown");
-	rect(tree.x, tree.y, tree.trunkWidth, tree.trunkHeight);
-	stroke("green");
-	fill(50, 190, 50);
-	triangle(tree.x - 80, tree.y, tree.x, tree.y - 150, tree.x + 120, tree.y);
-	triangle(tree.x - 70, tree.y - 50, tree.x, tree.y - 200, tree.x + 100, tree.y - 50);
-	triangle(tree.x - 55, tree.y - 100, tree.x, tree.y - 250, tree.x + 80, tree.y - 100);
-	noStroke();
-
+	treeCoor_x = [200, 600, 850, 1300];
+	for (var i = 0; i < treeCoor_x.length; i++) {
+		tree = {
+			x: treeCoor_x[i],
+			y: groundHeight,
+			trunkWidth: 30,
+			trunkHeight: 20,
+			canopyWidth: 120,
+			canopyHeight: 100
+		};
+		fill(139, 69, 19);
+		rect(tree.x, tree.y, tree.trunkWidth, tree.trunkHeight);
+		fill(50, 190, 50);
+		triangle(tree.x - 80, tree.y, tree.x, tree.y - 150, tree.x + 120, tree.y);
+		fill(50, 100, 50);
+		triangle(tree.x + 35, tree.y, tree.x, tree.y - 150, tree.x + 120, tree.y);
+		fill(50, 190, 50);
+		triangle(tree.x - 70, tree.y - 50, tree.x, tree.y - 200, tree.x + 100, tree.y - 50);
+		fill(50, 100, 50);
+		triangle(tree.x + 24, tree.y - 50, tree.x, tree.y - 200, tree.x + 100, tree.y - 50);
+		fill(50, 190, 50);
+		triangle(tree.x - 55, tree.y - 100, tree.x, tree.y - 250, tree.x + 80, tree.y - 100);
+		fill(50, 100, 50);
+		triangle(tree.x + 17, tree.y - 100, tree.x, tree.y - 250, tree.x + 80, tree.y - 100);
+	}
 }
 
 
@@ -270,9 +294,10 @@ function draw() {
 
 	background(100, 155, 255); //fill the sky blue
 	noStroke();
+	drawMountain();
 	fill(0, 155, 0);
 	rect(0, floorPos_y, width, height - floorPos_y);
-	drawCloud();
+	drawCloud()
 	drawSun();
 	drawDiamond();
 	//draw the canyon
@@ -305,7 +330,7 @@ function draw() {
 		drawStandingFront();
 
 	}
-	drawMountain();
+
 	drawTree();
 
 	// Перенос персонажа на другой край поля
