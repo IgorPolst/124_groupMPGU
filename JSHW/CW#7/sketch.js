@@ -1,6 +1,7 @@
 var gameChar_x;
 var gameChar_y;
 var floorPos_y;
+var diamonds = [];
 var isLeft;
 var isFalling;
 var isRight;
@@ -8,18 +9,15 @@ var isPlummeting;
 var speed;
 var jumpSpeed;
 var JUMPSPEED;
-var diamond;
-var position;
-var cloud;
 var clouds_coor;
 var sun;
 var vertex;
 var vertex_small;
 var tree_coor;
-var tree;
 var groundHeight;
 var treeHeight;
-
+var collectedDiamonds = 0; // Переменная для хранения количества собранных алмазов
+var diamond_draw = [];
 
 function setup() {
 	createCanvas(1024, 576);
@@ -44,15 +42,16 @@ function setup() {
 	};
 
 	//diamoond
-	position = {
-		pos_x: [], //random(30, 1000),
-		pos_y: [], //random(350, 400),
-		scale: 1.3
-	};
 	for (let i = 0; i < 4; i++) {
-		position.pos_x.push(random(30, 1000));
-		position.pos_y.push(random(350, 400));
+		var diamond_position = {
+			pos_x: random(30, 1000), //random(30, 1000),
+			pos_y: random(350, 400), //random(350, 400),
+			scale: 1.3,
+			collected: false
+		};
+		diamonds.push(diamond_position);
 	};
+
 	sun = {
 		x: 400,
 		y: 200,
@@ -189,64 +188,99 @@ function drawStandingFront() {
 	rect(gameChar_x - 10, gameChar_y - 13, 8, 15);
 }
 
-function drawDiamond() {
-	for (var i = 0; i < 4; i++) {
-		diamond = {
-		up_y: position.pos_y[i],
-		up_1x: position.pos_x[i],
-		up_2x: position.pos_x[i] + 10 * position.scale,
-		up_3x: position.pos_x[i] + 20 * position.scale,
-		midl_y: position.pos_y[i] + 10 * position.scale,
-		midl_1x: position.pos_x[i] - 5 * position.scale,
-		midl_2x: position.pos_x[i] + 5 * position.scale,
-		midl_3x: position.pos_x[i] + 15 * position.scale,
-		midl_4x: position.pos_x[i] + 25 * position.scale,
-		down_x: position.pos_x[i] + 10 * position.scale,
-		down_y: position.pos_y[i] + 30 * position.scale
-	};
-
-		fill(30, 144, 255);
-		triangle(diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y);
-		triangle(diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y);
-		fill(135, 206, 250);
-		triangle(diamond.midl_1x, diamond.midl_y, diamond.up_1x, diamond.up_y, diamond.midl_2x, diamond.midl_y);
-		triangle(diamond.midl_2x, diamond.midl_y, diamond.up_2x, diamond.up_y, diamond.midl_3x, diamond.midl_y);
-		triangle(diamond.midl_3x, diamond.midl_y, diamond.up_3x, diamond.up_y, diamond.midl_4x, diamond.midl_y);
-		fill(72, 61, 139);
-		triangle(diamond.midl_1x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_2x, diamond.midl_y);
-		triangle(diamond.midl_3x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_4x, diamond.midl_y);
-		fill(123, 104, 238);
-		triangle(diamond.midl_2x, diamond.midl_y, diamond.down_x, diamond.down_y, diamond.midl_3x, diamond.midl_y);
-	};
+function countCollectedDiamond() {
+	collectedDiamonds++; // Увеличить счетчик собранных алмазов на 1
 }
 
+function checkDiamondCollision(diamond, character) {
+	if (character.x > diamond_draw.x - 20 && character.x < diamond_draw.x + 20 && character.y > diamond_draw.y - 20 && character.y < diamond_draw.y + 20) {
+		return true; // Столкновение произошло
+	} else {
+		return false; // Нет столкновения
+	}
+}
+
+function drawDiamond() {
+  for (var i = 0; i < diamonds.length; i++) {
+    var diamond_position = diamonds[i];
+    var diamond_draw = {
+      up_y: diamond_position.pos_y,
+      up_1x: diamond_position.pos_x,
+      up_2x: diamond_position.pos_x + 10 * diamond_position.scale,
+      up_3x: diamond_position.pos_x + 20 * diamond_position.scale,
+      midl_y: diamond_position.pos_y + 10 * diamond_position.scale,
+      midl_1x: diamond_position.pos_x - 5 * diamond_position.scale,
+      midl_2x: diamond_position.pos_x + 5 * diamond_position.scale,
+      midl_3x: diamond_position.pos_x + 15 * diamond_position.scale,
+      midl_4x: diamond_position.pos_x + 25 * diamond_position.scale,
+      down_x: diamond_position.pos_x + 10 * diamond_position.scale,
+      down_y: diamond_position.pos_y + 30 * diamond_position.scale
+    };
+
+    fill(30, 144, 255);
+    triangle(diamond_draw.up_1x, diamond_draw.up_y, diamond_draw.midl_2x, diamond_draw.midl_y, diamond_draw.up_2x, diamond_draw.up_y);
+    triangle(diamond_draw.up_2x, diamond_draw.up_y, diamond_draw.midl_3x, diamond_draw.midl_y, diamond_draw.up_3x, diamond_draw.up_y);
+
+    fill(135, 206, 250);
+    triangle(diamond_draw.midl_1x, diamond_draw.midl_y, diamond_draw.up_1x, diamond_draw.up_y, diamond_draw.midl_2x, diamond_draw.midl_y);
+    triangle(diamond_draw.midl_2x, diamond_draw.midl_y, diamond_draw.up_2x, diamond_draw.up_y, diamond_draw.midl_3x, diamond_draw.midl_y);
+    triangle(diamond_draw.midl_3x, diamond_draw.midl_y, diamond_draw.up_3x, diamond_draw.up_y, diamond_draw.midl_4x, diamond_draw.midl_y);
+
+    fill(72, 61, 139);
+    triangle(diamond_draw.midl_1x, diamond_draw.midl_y, diamond_draw.down_x, diamond_draw.down_y, diamond_draw.midl_2x, diamond_draw.midl_y);
+    triangle(diamond_draw.midl_3x, diamond_draw.midl_y, diamond_draw.down_x, diamond_draw.down_y, diamond_draw.midl_4x, diamond_draw.midl_y);
+
+    fill(123, 104, 238);
+    triangle(diamond_draw.midl_2x, diamond_draw.midl_y, diamond_draw.down_x, diamond_draw.down_y, diamond_draw.midl_3x, diamond_draw.midl_y);
+    if (checkDiamondCollision({
+      x: diamond_draw.up_2x,
+      y: diamond_draw.up_y
+    }, {
+      x: gameChar_x,
+      y: gameChar_y
+    })) {
+      if (!diamonds[i].collected) {
+        countCollectedDiamond(); // Увеличение счетчика собранных алмазов
+        diamonds[i].collected = true; // Установка флага собранного алмаза
+      }
+    }
+  }
+}
+
+function drawTokens() {
+    for (var i = 0; i < diamonds.length; i++) {
+        if (!diamonds[i].collected) {
+            fill(255, 255, 0);
+            ellipse(diamonds[i].x, diamonds[i].y, 30, 30);
+        }
+    }
+}
+//Отрисовка побочных объектов
 function drawCloud() {
 	for (var i = 0; i < 8; i++) {
-
-		cloud = {
+		var cloud = {
 			x: clouds_coor.cor_x[i],
 			y: clouds_coor.cor_y[i],
 			diameter: 40
 		};
-		noStroke(); //fill the sky blue 
 
+		noStroke(); // Убираем обводку
 		fill(clouds_coor.color[i % 3]);
-		ellipse(cloud.x + 120, cloud.y, cloud.diameter);
-		ellipse(cloud.x, cloud.y, cloud.diameter);
-		ellipse(cloud.x + 30, cloud.y, cloud.diameter * 1.5);
-		ellipse(cloud.x + 90, cloud.y, cloud.diameter * 1.5);
-		ellipse(cloud.x + 60, cloud.y - 10, cloud.diameter * 2)
+
+		// Рисуем облако с различными диаметрами и позициями
+		ellipse(cloud.x, cloud.y, cloud.diameter); // Центральный облака
+		ellipse(cloud.x + 120, cloud.y, cloud.diameter); // Правое облако
+		ellipse(cloud.x + 30, cloud.y, cloud.diameter * 1.5); // Левое облако
+		ellipse(cloud.x + 90, cloud.y, cloud.diameter * 1.5); // Правое облако
+		ellipse(cloud.x + 60, cloud.y - 10, cloud.diameter * 2); // Нижнее облако
 	}
 }
-
-
 function drawSun() {
 	fill(255, 255, 0);
 	stroke(255, 215, 0);
 	ellipse(sun.x, sun.y, sun.diameter);
 	noStroke();
 }
-
 function drawMountain() {
 	//2. a mountain in the distance
 	// main triangle
@@ -258,11 +292,10 @@ function drawMountain() {
 	triangle(vertex_small.x1, vertex_small.y1, vertex_small.x2, vertex_small.y2, vertex_small.x3, vertex_small.y3);
 
 }
-
 function drawTree() {
 	treeCoor_x = [200, 600, 850, 1300];
 	for (var i = 0; i < treeCoor_x.length; i++) {
-		tree = {
+		var tree = {
 			x: treeCoor_x[i],
 			y: groundHeight,
 			trunkWidth: 30,
@@ -286,68 +319,84 @@ function drawTree() {
 		triangle(tree.x + 17, tree.y - 100, tree.x, tree.y - 250, tree.x + 80, tree.y - 100);
 	}
 }
+	
+//Вывод сообщений	
+	function drawCollectedDiamonds() {
+    fill(255);
+    textSize(20);
+    text("Collected Diamonds: " + collectedDiamonds, 20, 20);
+}
+	function drawMousePosition() {
+    fill(255);
+    textSize(20);
+    text("Mouse X: " + mouseX + ", Mouse Y: " + mouseY, 20, 50);
+}
+	function drawCharacterPosition() {
+       fill(255); // Белый цвет текста
+    textSize(20); // Установка размера текста
+    text("Character X: " +  gameChar_x  + ", Character Y: " + gameChar_y, 20, 80); // Отображение координат персонажа в верхнем левом углу
+}
+	
 
 
 function draw() {
-
-	///////////DRAWING CODE//////////
-
-	background(100, 155, 255); //fill the sky blue
-	noStroke();
-	drawMountain();
-	fill(0, 155, 0);
-	rect(0, floorPos_y, width, height - floorPos_y);
-	drawCloud()
-	drawSun();
-	drawDiamond();
-	//draw the canyon
-	//Движения персонажа
-	if (isLeft && isFalling) {
-		drawJumpingLeft();
-		makeJump();
-		gameChar_x -= speed;
-
-
-	} else if (isRight && isFalling) {
-		drawJumpingRight();
-		makeJump();
-		gameChar_x += speed;
-	} else if (isLeft) {
-		drawGoLeft();
-		gameChar_x -= speed;
-	} else if (isRight) {
-		drawGoRight();
-		gameChar_x += speed;
-
-	} else if (isFalling || isPlummeting) {
-		// add your jumping facing forwards code
-		drawJumpingFront();
-		makeJump();
-
-
-	} else {
-		// add your standing front facing code
-		drawStandingFront();
-
-	}
-
-	drawTree();
-
-	// Перенос персонажа на другой край поля
-	if (gameChar_x > 1024) {
-		gameChar_x = 0;
-	} else if (gameChar_x < 0) {
-		gameChar_x = 1024;
-	}
+  background(100, 155, 255); // fill the sky blue
+  noStroke();
+  
+  // Отображение заднего плана
+  drawMountain();
+  fill(0, 155, 0);
+  rect(0, floorPos_y, width, height - floorPos_y);
+  drawCloud();
+  drawSun();
+  drawDiamond();
+  
+  // Отображение деревьев
+  drawTree();
+  
+  // Отображение персонажа
+  if (isLeft && isFalling) {
+    drawJumpingLeft();
+    makeJump();
+    gameChar_x -= speed;
+  } else if (isRight && isFalling) {
+    drawJumpingRight();
+    makeJump();
+    gameChar_x += speed;
+  } else if (isLeft) {
+    drawGoLeft();
+    gameChar_x -= speed;
+  } else if (isRight) {
+    drawGoRight();
+    gameChar_x += speed;
+  } else if (isFalling || isPlummeting) {
+    drawJumpingFront();
+    makeJump();
+  } else {
+    drawStandingFront();
+  }
+  
+  // Перенос персонажа на другой край поля
+  if (gameChar_x > width) {
+    gameChar_x = 0;
+  } else if (gameChar_x < 0) {
+    gameChar_x = width;
+  }
+  
+    // Проверка столкновения с токенами (алмазами)
+  for (var i = 0; i < diamonds.length; i++) {
+    if (!diamonds[i].collected && checkDiamondCollision(diamonds[i], { x: gameChar_x, y: gameChar_y })) {
+      countCollectedDiamond(); // Увеличение счетчика собранных алмазов
+      diamonds[i].collected = true; // Установка флага собранного алмаза
+    }
+  }
+	 // Визуализация количества собранных алмазов, позиции мыши и позиции персонажа
+	drawCollectedDiamonds();
+    drawMousePosition();
+    drawCharacterPosition();
 }
 
-
 function keyPressed() {
-	// if statements to control the animation of the character when
-	// keys are pressed.
-	//open up the console to see how these work
-	console.log("keyPressed: " + key);
-	console.log("keyPressed: " + keyCode);
 	if (keyCode === RIGHT_ARROW) {
 		isRight = true;
 	} else if (keyCode === LEFT_ARROW) {
@@ -358,11 +407,6 @@ function keyPressed() {
 }
 
 function keyReleased() {
-	// if statements to control the animation of the character when
-	// keys are released.
-
-	console.log("keyReleased: " + key);
-	console.log("keyReleased: " + keyCode);
 
 	if (keyCode === RIGHT_ARROW) {
 		isRight = false;
