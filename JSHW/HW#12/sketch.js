@@ -55,10 +55,6 @@ function setup() {
 	for (let i = 0; i < robots.length; i++) {
 		if (robots[i].secondName == "Katan") {
 			console.log(i + 1, robots[i].firstName + " " + robots[i].secondName);
-			robots[i].physical.r = 0;
-			robots[i].physical.g = 255;
-			robots[i].physical.b = 0;
-			drawRobot(robots[i].physical, robots[i].firstName, robots[i].secondName);
 			highlight(robots[i], 0, 255, 0); // Highlight in green color
 			break;
 		} else {
@@ -72,6 +68,7 @@ function setup() {
 			clever_robot.id = i;
 		}
 	}
+	highlight(robots[clever_robot.id],0,0,255);
 
 	console.log("Clever robot is " + clever_robot.name + ". He has IQ = " + clever_robot.iq + ". His ID is " + (clever_robot.id + 1));
 
@@ -99,7 +96,6 @@ function setup() {
 			narrowFaceRobot = i;
 		}
 	}
-
 	// Подсветка робота с самым маленьким серийным номером (задание 4)
 	highlight(robots[interest_robot[3]], 128, 0, 128); // Подсветка в пурпурный цвет
 

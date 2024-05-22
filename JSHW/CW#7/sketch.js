@@ -192,12 +192,13 @@ function countCollectedDiamond() {
 	collectedDiamonds++; // Увеличить счетчик собранных алмазов на 1
 }
 
-function checkDiamondCollision(diamond, character) {
-	if (character.x > diamond_draw.x - 20 && character.x < diamond_draw.x + 20 && character.y > diamond_draw.y - 20 && character.y < diamond_draw.y + 20) {
-		return true; // Столкновение произошло
-	} else {
-		return false; // Нет столкновения
-	}
+function checkDiamondCollision(diamond) {
+  if (gameChar_x > diamond.pos_x - 20 && gameChar_x < diamond.pos_x + 20 &&
+      gameChar_y > diamond.pos_y - 20 && gameChar_y < diamond.pos_y + 20) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function drawDiamond() {
