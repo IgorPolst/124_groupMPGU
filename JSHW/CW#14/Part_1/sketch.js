@@ -6,6 +6,7 @@ function setup() {
 	createCanvas(1200, 800);
 	screenBorder = 100;
 	tadpoles = [];
+	// Создаёт ир=кинки и их изначальное слуайное положение
 	for (var i = 0; i < 100; i++) {
 		tadpoles.push(
 			createTadpole(
@@ -14,12 +15,12 @@ function setup() {
 			)
 		);
 	}
-	console.log(tadpoles);
 }
 
 function draw() {
 
 	background(0, 105, 148);
+	// Отрисовка всех икринок
 	for (let i = 0; i < tadpoles.length; i++) {
 		tadpoles[i].update();
 		tadpoles[i].draw();
@@ -29,12 +30,14 @@ function draw() {
 
 
 function mousePressed() {
-	for (let i = 0; i <100; i++ ){
-		var v = createVector(mouseX, mouseY);
-		
-		if (!tadpoles[i].isHatched){
+	for (let i = 0; i < 100; i++) {
+		var v = createVector(mouseX, mouseY); //Создаёт вектор с координатами расположения курсора
+
+		if (!tadpoles[i].isHatched) { // Проверяет вылупленность икринки
+			tadpoles[i].testClick(v); //Проверяет попадение в икринку и меняет её состояни на вылупившуюся 
+		} else if (!tadpoles[i].isFrog && tadpoles[i].isHatched) { //Вылупился головастик и не стал ли головастик лягушкой
 			tadpoles[i].testClick(v);
-		};	
+		};
 	};
 
 }
@@ -42,24 +45,26 @@ function mousePressed() {
 function createTadpole(x, y) {
 	let tadpole = {
 
-		pos: undefined,
-		dir: undefined,
-		isHatched: false,
-		tailFlick: 5,
-		tailIncr: -1,
+		pos: undefined, // Вектор расположения
+		dir: undefined, // Вектор направления движения
+		isHatched: false, // Стала ли мальком
+		isFrog: false, // Стала ли лягушкой
+		tailFlick: 5, // Длина хвоста малька
+		tailIncr: -1, //Скорость колебания хвостика малька
 
-		setup: function (x, y) {
+
+		setup: function (x, y) { // Создаёт первоначальную икринку 
 			this.pos = createVector(x, y);
 			this.dir = createVector(random(-1, 1), random(-1, 1));
 			this.dir.normalize();
 		},
 
-		draw: function () {
+		draw: function () { // Отрисовка состояний
 			push();
 
 			translate(this.pos.x, this.pos.y);
 
-			if (!this.isHatched) {
+			if (!this.isHatched) { // Икринка
 
 				fill(100, 100);
 				stroke(150);
@@ -67,7 +72,7 @@ function createTadpole(x, y) {
 				fill(0);
 				ellipse(0, 0, 6);
 
-			} else {
+			} else if (!this.isFrog) { // Малёк
 				rotate(this.dir.heading());
 				fill(0);
 				stroke(0);
@@ -81,36 +86,53 @@ function createTadpole(x, y) {
 				curveVertex(-18, this.tailFlick);
 				curveVertex(-36, 0);
 				curveVertex(-36, 0);
-
-
 				endShape();
-			}
+			} else {
+
+
+				// Draw frog body
+				fill('green');
+				ellipse(0, 0, 40, 50);
+
+				// Draw head
+				fill('green');
+				ellipse(0, 0 - 15, 30, 35);
+
+				// Draw eyes
+				fill('white');
+				ellipse(0 - 10, 0 - 20, 12, 12); // Левый глаз
+				ellipse(0 + 10, 0 - 20, 12, 12); // Правый глаз
+
+				// Draw pupils
+				fill('black');
+				ellipse(0 - 15, 0 - 20, 6, 6); // Левый зрачок
+				ellipse(0 + 15, 0 - 20, 6, 6); // Правый зрачок
+
+				// Draw mouth
+				noFill();
+				stroke('black');
+				strokeWeight(2);
+				arc(0, 0 - 10, 20, 10, 0, PI);
+			};
 
 			pop();
 		},
 
 		update: function () {
-			if (!this.isHatched) {
+			if (!this.isHatched) {// Колебание на месте икринок
 				this.pos.x += random(-0.5, 0.5);
 				this.pos.y += random(-0.5, 0.5);
-			} else {
-
+			} else if (this.isHatched && !this.isFrog) {
 				this.tailFlick += this.tailIncr;
-
-				if (abs(this.tailFlick) > 5) {
-					this.tailIncr *= -1;
-				}
-
+				if (abs(this.tailFlick) > 5) 
+					this.tailIncr *= -1;			
 				this.pos.add(this.dir);
-
-
-
-			}
-
+			} else 
+				this.pos.add(this.dir);
 			this.screenWrap();
 		},
 
-		screenWrap: function () {
+		screenWrap: function () { // Обработка в случае ухода за экран
 			if (this.pos.x > width + screenBorder) {
 				this.pos.x -= width + screenBorder;
 			} else if (this.pos.x < -screenBorder) {
@@ -124,12 +146,15 @@ function createTadpole(x, y) {
 			}
 		},
 
-		testClick: function (mouse) {
+		testClick: function (mouse) { // Проверяет попал ли курсор в область объекта = 25
 			if (this.pos.dist(mouse) < 25) {
-				this.isHatched = true;
+				if (!this.isHatched)
+					this.isHatched = true;
+				else
+					this.isFrog = true;
 			}
 		}
 	};
-	tadpole.setup(x,y);
+	tadpole.setup(x, y);
 	return tadpole;
 }
