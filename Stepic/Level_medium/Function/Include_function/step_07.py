@@ -6,8 +6,8 @@ for _ in range(int(input())):
     studentes = [tuple(input().split()) for _ in range(int(input()))]
     great_class.append(find_great_student(studentes))
 
+
 if all(great_class):
     print("YES")
 else:
     print("NO")
-
