@@ -1,6 +1,6 @@
 numbers = [int(i) for i in input().split()]
 
-result=[]
+result = []
 for i in numbers:
     if numbers.count(i) > 1:
         result.append(i)
