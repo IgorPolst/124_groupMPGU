@@ -8,4 +8,4 @@ times = [time(7, 33, 27), time(21, 2, 10), time(17, 20, 47), time(20, 8, 59),
          time(12, 42, 56), time(15, 9, 57), time(17, 47, 9), time(9, 40, 2), 
          time(11, 47, 1), time(17, 27, 10), time(17, 55, 40), time(9, 14, 9)]
 
-print(*sorted(map(lambda date, time: datetime.combine(date, time),dates, times), reverse= True), sep = "\n")
+print(*sorted(map(lambda date, time: datetime.combine(date, time),dates, times), key = lambda x: x.second), sep = "\n")
